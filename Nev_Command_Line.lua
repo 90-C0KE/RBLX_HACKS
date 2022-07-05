@@ -253,9 +253,8 @@ NCL.Parent = NevCoreGui
 NCL.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 NCL.BackgroundTransparency = 1.000
 NCL.BorderSizePixel = 0
-NCL.Position = UDim2.new(0.139784947, 0, 0.643338978, 0)
-NCL.Size = UDim2.new(0.720430136, 0, 0.337268114, 0)
-NCL.Visible = false
+NCL.Position = UDim2.new(0.217231199, 0, 0.715851605, 0)
+NCL.Size = UDim2.new(0.565537632, 0, 0.264755458, 0)
 
 Top_3.Name = "Top"
 Top_3.Parent = NCL
