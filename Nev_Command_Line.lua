@@ -35,6 +35,8 @@ UI_Parent = nil
 input = game:GetService("UserInputService")
 tweenService = game:GetService("TweenService")
 tweenInfo = TweenInfo.new
+low = string.lower
+RunService = game:GetService("RunService")
 
 --|| GUI ||--
 local NevCoreGui = Instance.new("ScreenGui")
@@ -67,6 +69,14 @@ local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
 local Drag = Instance.new("Frame")
 local Label_2 = Instance.new("TextLabel")
 local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
+local Alert = Instance.new("Frame")
+local Top_4 = Instance.new("Frame")
+local Title_3 = Instance.new("TextLabel")
+local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
+local Content_2 = Instance.new("Frame")
+local Top_5 = Instance.new("Frame")
+local Msg = Instance.new("TextLabel")
+local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
 
 --|| Code ||--
 local function randomString(length)
@@ -255,6 +265,7 @@ NCL.BackgroundTransparency = 1.000
 NCL.BorderSizePixel = 0
 NCL.Position = UDim2.new(0.217231199, 0, 0.715851605, 0)
 NCL.Size = UDim2.new(0.565537632, 0, 0.264755458, 0)
+NCL.Visible = false
 
 Top_3.Name = "Top"
 Top_3.Parent = NCL
@@ -385,8 +396,204 @@ Label_2.TextWrapped = true
 UITextSizeConstraint_6.Parent = Label_2
 UITextSizeConstraint_6.MaxTextSize = 40
 
-wait(5)
+Alert.Name = "Alert"
+Alert.Parent = NevCoreGui
+Alert.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Alert.BackgroundTransparency = 1.000
+Alert.BorderSizePixel = 0
+Alert.Position = UDim2.new(0.360662341, 0, 0.41315347, 0)
+Alert.Size = UDim2.new(0.278675288, 0, 0.173693091, 0)
+Alert.Visible = false
+
+Top_4.Name = "Top"
+Top_4.Parent = Alert
+Top_4.BackgroundColor3 = Color3.fromRGB(156, 156, 156)
+Top_4.BackgroundTransparency = 0.500
+Top_4.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Top_4.BorderSizePixel = 2
+Top_4.Position = UDim2.new(0.013043493, 0, 0, 0)
+Top_4.Size = UDim2.new(0.973913014, 0, 0.466019422, 0)
+
+Title_3.Name = "Title"
+Title_3.Parent = Top_4
+Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title_3.BackgroundTransparency = 1.000
+Title_3.BorderSizePixel = 0
+Title_3.Size = UDim2.new(1, 0, 1, 0)
+Title_3.Font = Enum.Font.SourceSansBold
+Title_3.Text = "A L E R T"
+Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title_3.TextScaled = true
+Title_3.TextSize = 21.000
+Title_3.TextWrapped = true
+
+UITextSizeConstraint_7.Parent = Title_3
+UITextSizeConstraint_7.MaxTextSize = 21
+
+Content_2.Name = "Content"
+Content_2.Parent = Alert
+Content_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Content_2.BackgroundTransparency = 0.700
+Content_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Content_2.BorderSizePixel = 2
+Content_2.Position = UDim2.new(0.013043493, 0, 0.533980608, 0)
+Content_2.Size = UDim2.new(0.973999977, 0, 0.465999991, 0)
+
+Top_5.Name = "Top"
+Top_5.Parent = Content_2
+Top_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Top_5.BackgroundTransparency = 0.400
+Top_5.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Top_5.BorderSizePixel = 2
+Top_5.Size = UDim2.new(1, 0, 1, 0)
+
+Msg.Name = "Msg"
+Msg.Parent = Top_5
+Msg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Msg.BackgroundTransparency = 1.000
+Msg.BorderSizePixel = 0
+Msg.Position = UDim2.new(0, 0, -0.0212765951, 0)
+Msg.Size = UDim2.new(1, 0, 1.02127659, 0)
+Msg.Font = Enum.Font.SourceSansSemibold
+Msg.Text = "This is a test"
+Msg.TextColor3 = Color3.fromRGB(255, 255, 255)
+Msg.TextScaled = true
+Msg.TextSize = 14.000
+Msg.TextWrapped = true
+
+UITextSizeConstraint_8.Parent = Msg
+UITextSizeConstraint_8.MaxTextSize = 14
+
+function alert(Title, Text)
+	local minWidth, minHeight = 0.974, 0.466 --Scale Size
+	
+	Content.Size = UDim2.new(math.max(minWidth, Msg.TextBounds.X), 0, math.max(minHeight, Msg.TextBounds.Y), 0)
+	
+	Alert.Top.Title.Text = tostring(Title)
+	Alert.Content.Top.Msg.Text = tostring(Text)
+
+	Alert.Visible = true
+	wait(3)
+	Alert.Visible = false
+end
+
+cmdPrefix = "$"
+
+local CMDS = {}
+CMDS.Commands = {
+	[cmdPrefix .. "prefix"] = "Shows the the command prefix.";
+	[cmdPrefix .. "version"] = "Shows Nev Command Line version.";
+	[cmdPrefix .. "noclip"] = "Enables noclip.";
+	[cmdPrefix .. "clip"] = "Disabled noclip.";
+	[cmdPrefix .. "nctoggle"] = "Toggless noclip.";
+	[cmdPrefix .. "infiniteJump"] = "Enables/Disables infinite jump.";
+	[cmdPrefix .. "infjump"] = "Enables/Disables infinite jump.";
+	[cmdPrefix .. "walkspeed"] = "Set player walkspeed.";
+	[cmdPrefix .. "ws"] = "Set player walkspeed.";
+	[cmdPrefix .. "jumppower"] = "Set player jumppower";
+	[cmdPrefix .. "jp"] = "Set player jumppower";
+	[cmdPrefix .. "keybind.new"] = "Create new keybind."
+}
+
+local Noclipping = nil
+local Clip = true
+local infJump = false
+
+input.JumpRequest:Connect(function()
+	local Char = Players.LocalPlayer.Character
+	if not Char then alert("E R R O R", "Cannot find character!") return end
+	local Hum = Char:FindFirstChild("Humanoid")
+	if not Hum then alert("E R R O R", "Cannot find humanoid!") return end
+	if infJump then
+		Hum:ChangeState(3)
+	end
+end)
+
+local commandFunctions = {}
+
+function createCMD(Name, Action)
+	commandFunctions[Name] = Action
+end
+
+createCMD(cmdPrefix .. "close", function()
+	NevCoreGui:Destroy()
+	getgenv().NCL_isLOADED = false
+end)
+
+createCMD("prefix", function()
+	alert("P R E F I X", "The current command prefix is '" .. cmdPrefix .. "'")
+end)
+
+createCMD(cmdPrefix .. "infinitejump", function()
+	infJump = not infJump
+end)
+
+createCMD(cmdPrefix .. "infjump", function()
+	infJump = not infJump
+end)
+
+createCMD(cmdPrefix .. "noclip", function()
+	Clip = false
+	local function Nocliploop()
+		if Clip == false and Players.LocalPlayer.Character ~= nil then
+			for _, child in pairs(Players.LocalPlayer.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true then
+					child.CanCollide = false
+				end
+			end
+		end
+	end
+	Noclipping = RunService.Stepped:Connect(NoclipLoop)
+end)
+
+createCMD(cmdPrefix .. "clip", function()
+	if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clip = true
+end)
+
+createCMD(cmdPrefix .. "unnoclip", function()
+	if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clip = true
+end)
+
+createCMD(cmdPrefix .. "nctoggle", function()
+	if Clip == true then
+		Clip = false
+		local function NoclipLoop()
+			if Clip == false and Players.LocalPlayer.Character ~= nil then
+				for _, child in pairs(Players.LocalPlayer.Character:GetDescendants()) do
+					if child:IsA("BasePart") and child.CanCollide == true then
+						child.CanCollide = false
+					end
+				end
+			end
+		end
+		Noclipping = RunService.Stepped:Connect(NoclipLoop)
+	else
+		if Noclipping then
+			Noclipping:Disconnect()
+		end
+		Clip = true
+	end
+end)
+
+wait(8)
 
 Loader.Visible = false
 NCL.Visible = true
 makeDraggable(Label_2, NCL)
+
+CmdLine.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		local Splits = string.split(CmdLine.Text, " ")
+		if commandFunctions[low(Splits[1])] then
+			commandFunctions[low(Splits[1])]()
+		else
+			alert("E R R O R", Splits[1] .. " is not a valid command!")
+		end
+	end
+end)
